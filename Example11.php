@@ -4,9 +4,9 @@
  */
 
  // Standard inclusions
- include("pChart/pData.class");
- include("pChart/pChart.class");
- include("pChart/pCache.class");
+ include("pChart/pData.php");
+ include("pChart/pChart.php");
+ include("pChart/pCache.php");
 
  // Dataset definition
  $DataSet = new pData;
