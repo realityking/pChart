@@ -3,11 +3,11 @@
      Example24 : X versus Y chart
  */
 
- // Standard inclusions   
+ // Standard inclusions
  include("pChart/pData.class");
  include("pChart/pChart.class");
 
- // Dataset definition 
+ // Dataset definition
  $DataSet = new pData;
 
  // Compute the points

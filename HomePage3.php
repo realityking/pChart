@@ -3,11 +3,11 @@
      Example21 : A single stacked bar graph
  */
 
- // Standard inclusions   
+ // Standard inclusions
  include("pChart/pData.class");
  include("pChart/pChart.class");
 
- // Dataset definition 
+ // Dataset definition
  $DataSet = new pData;
  $DataSet->AddPoint(array(1,2,5),"Serie1");
  $DataSet->AddPoint(array(3,2,2),"Serie2");
@@ -21,7 +21,7 @@
  $DataSet->SetSerieName("Gama","Serie3");
  $DataSet->SetXAxisName("Samples IDs");
  $DataSet->SetYAxisName("Test Marker");
- $DataSet->SetYAxisUnit("µm");
+ $DataSet->SetYAxisUnit("Âµm");
 
  // Initialise the graph
  $Test = new pChart(380,400);
@@ -35,13 +35,13 @@
  $Test->drawGraphAreaGradient(40,40,40,-50);
  $Test->drawGrid(4,TRUE,230,230,230,5);
 
- // Draw the title   
+ // Draw the title
  $Test->setFontProperties("Fonts/tahoma.ttf",10);
- $Title = "  Average growth size for selected\r\n  DNA samples  ";   
+ $Title = "  Average growth size for selected\r\n  DNA samples  ";
  $Test->setLineStyle(2);
- $Test->drawLine(51,-2,51,402,0,0,0);   
+ $Test->drawLine(51,-2,51,402,0,0,0);
  $Test->setLineStyle(1);
- $Test->drawTextBox(0,0,50,400,$Title,90,255,255,255,ALIGN_BOTTOM_CENTER,TRUE,0,0,0,30);   
+ $Test->drawTextBox(0,0,50,400,$Title,90,255,255,255,ALIGN_BOTTOM_CENTER,TRUE,0,0,0,30);
  $Test->setFontProperties("Fonts/pf_arma_five.ttf",6);
 
  // Draw the bar graph

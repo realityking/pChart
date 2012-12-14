@@ -3,11 +3,11 @@
      Example21 : A single stacked bar graph
  */
 
- // Standard inclusions   
+ // Standard inclusions
  include("pChart/pData.class");
  include("pChart/pChart.class");
 
- // Dataset definition 
+ // Dataset definition
  $DataSet = new pData;
  $DataSet->AddPoint(1,"Serie1");
  $DataSet->AddPoint(3,"Serie2");
@@ -20,7 +20,7 @@
  $DataSet->SetSerieName("Beta","Serie2");
  $DataSet->SetSerieName("Gama","Serie3");
  $DataSet->SetYAxisName("Test Marker");
- $DataSet->SetYAxisUnit("µm");
+ $DataSet->SetYAxisUnit("Âµm");
 
  // Initialise the graph
  $Test = new pChart(210,230);

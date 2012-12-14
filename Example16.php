@@ -3,11 +3,11 @@
      Example16 : Importing CSV data
  */
 
- // Standard inclusions   
+ // Standard inclusions
  include("pChart/pData.class");
  include("pChart/pChart.class");
 
- // Dataset definition 
+ // Dataset definition
  $DataSet = new pData;
  $DataSet->ImportFromCSV("Sample/CO2.csv",",",array(1,2,3,4),TRUE,0);
  $DataSet->AddAllSeries();
@@ -34,8 +34,8 @@
  $Test->drawPlotGraph($DataSet->GetData(),$DataSet->GetDataDescription(),3,2,255,255,255);
 
  // Finish the graph
- $Test->setFontProperties("Fonts/tahoma.ttf",8);   
- $Test->drawLegend(70,40,$DataSet->GetDataDescription(),255,255,255);   
+ $Test->setFontProperties("Fonts/tahoma.ttf",8);
+ $Test->drawLegend(70,40,$DataSet->GetDataDescription(),255,255,255);
  $Test->setFontProperties("Fonts/tahoma.ttf",10);
  $Test->drawTitle(60,22,"CO2 concentrations at Mauna Loa",50,50,50,585);
  $Test->Render("example16.png");

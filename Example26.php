@@ -3,11 +3,11 @@
      Example26 : Two Y axis / shadow demonstration
  */
 
- // Standard inclusions   
+ // Standard inclusions
  include("pChart/pData.class");
  include("pChart/pChart.class");
 
- // Dataset definition 
+ // Dataset definition
  $DataSet = new pData;
  $DataSet->AddPoint(array(110,101,118,108,110,106,104),"Serie1");
  $DataSet->AddPoint(array(700,2705,2041,1712,2051,846,903),"Serie2");

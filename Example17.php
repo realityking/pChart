@@ -1,4 +1,4 @@
-<?php   
+<?php
  /*
      Example17 : Playing with axis
  */
@@ -6,7 +6,7 @@
  // Standard inclusions
  include("pChart/pData.class");
  include("pChart/pChart.class");
-  
+
  // Dataset definition
  $DataSet = new pData;
  $DataSet->AddPoint(array(100,320,200,10,43),"Serie1");
@@ -21,7 +21,7 @@
  $DataSet->SetYAxisFormat("time");
  $DataSet->SetXAxisFormat("date");
 
- // Initialise the graph   
+ // Initialise the graph
  $Test = new pChart(700,230);
  $Test->setFontProperties("Fonts/tahoma.ttf",8);
  $Test->setGraphArea(85,30,650,200);
@@ -30,15 +30,15 @@
  $Test->drawGraphArea(255,255,255,TRUE);
  $Test->drawScale($DataSet->GetData(),$DataSet->GetDataDescription(),SCALE_NORMAL,150,150,150,TRUE,0,2);
  $Test->drawGrid(4,TRUE,230,230,230,50);
- 
- // Draw the 0 line   
+
+ // Draw the 0 line
  $Test->setFontProperties("Fonts/tahoma.ttf",6);
  $Test->drawTreshold(0,143,55,72,TRUE,TRUE);
-  
+
  // Draw the line graph
  $Test->drawLineGraph($DataSet->GetData(),$DataSet->GetDataDescription());
  $Test->drawPlotGraph($DataSet->GetData(),$DataSet->GetDataDescription(),3,2,255,255,255);
-  
+
  // Finish the graph
  $Test->setFontProperties("Fonts/tahoma.ttf",8);
  $Test->drawLegend(90,35,$DataSet->GetDataDescription(),255,255,255);

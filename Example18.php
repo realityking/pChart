@@ -3,11 +3,11 @@
      Example18 : Missing values
  */
 
- // Standard inclusions   
+ // Standard inclusions
  include("pChart/pData.class");
  include("pChart/pChart.class");
 
- // Dataset definition 
+ // Dataset definition
  $DataSet = new pData;
  $DataSet->AddPoint(array(2,5,7,"","",5,6,4,8,4,"",2,5,6,4,5,6,7,6),"Serie1");
  $DataSet->AddPoint(array(-1,-3,-1,-2,-4,-1,"",-4,-5,-3,-2,-2,-3,-3,-5,-4,-3,-1,""),"Serie2");
@@ -36,14 +36,14 @@
 
  // Draw the line graph
  $DataSet->RemoveSerie("Serie2");
- $Test->drawFilledLineGraph($DataSet->GetData(),$DataSet->GetDataDescription(),60,TRUE);   
+ $Test->drawFilledLineGraph($DataSet->GetData(),$DataSet->GetDataDescription(),60,TRUE);
 
  // Draw the curve graph
  $DataSet->RemoveSerie("Serie1");
  $DataSet->AddSerie("Serie2");
  $Test->setShadowProperties(2,2,200,200,200,50);
  $Test->drawCubicCurve($DataSet->GetData(),$DataSet->GetDataDescription());
- $Test->drawPlotGraph($DataSet->GetData(),$DataSet->GetDataDescription(),3,2,255,255,255);   
+ $Test->drawPlotGraph($DataSet->GetData(),$DataSet->GetDataDescription(),3,2,255,255,255);
  $Test->clearShadow();
 
  // Finish the graph
