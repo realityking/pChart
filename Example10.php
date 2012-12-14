@@ -31,4 +31,3 @@
  $Test->drawTitle(10,20,"Sales per month",100,100,100);
 
  $Test->Render("example10.png");
-?>

@@ -52,4 +52,3 @@
 
  // Render the picture
  $Test->Render("example25.png");
-?>

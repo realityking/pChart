@@ -42,4 +42,3 @@
  $Test->setFontProperties("Fonts/tahoma.ttf",10);
  $Test->drawTitle(60,22,"example 1",50,50,50,585);
  $Test->Render("example1.png");
-?>

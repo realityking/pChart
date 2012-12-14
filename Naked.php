@@ -31,4 +31,3 @@
  $Test->setFontProperties("Fonts/tahoma.ttf",10);
  $Test->drawTitle(60,22,"My pretty graph",50,50,50,585);
  $Test->Render("Naked.png");
-?>

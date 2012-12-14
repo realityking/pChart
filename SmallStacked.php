@@ -45,4 +45,3 @@
  $Test->setFontProperties("Fonts/tahoma.ttf",10);
  $Test->drawTitle(0,22,"Sample size",50,50,50,210);
  $Test->Render("SmallStacked.png");
-?>

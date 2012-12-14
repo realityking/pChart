@@ -65,4 +65,3 @@
 
  // Render the chart
  $Test->Render("example15.png");
-?>

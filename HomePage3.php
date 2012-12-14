@@ -67,4 +67,3 @@
  // Finish the graph
  $Test->addBorder(1);
  $Test->Render("HomePage2.png");
-?>

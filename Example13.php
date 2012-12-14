@@ -29,4 +29,3 @@
  $Test->drawPieLegend(230,15,$DataSet->GetData(),$DataSet->GetDataDescription(),250,250,250);
 
  $Test->Render("example13.png");
-?>

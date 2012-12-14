@@ -39,4 +39,3 @@
  $Test->setFontProperties("Fonts/tahoma.ttf",10);
  $Test->drawTitle(60,22,"CO2 concentrations at Mauna Loa",50,50,50,585);
  $Test->Render("example16.png");
-?>

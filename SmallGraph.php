@@ -27,4 +27,3 @@
 
  // Finish the graph
  $Test->Render("SmallGraph.png");
-?>

@@ -47,4 +47,3 @@
  // Render the graph
  $Cache->WriteToCache("Graph1",$DataSet->GetData(),$Test);
  $Test->Render("example1.png");
-?>
