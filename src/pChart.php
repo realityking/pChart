@@ -963,7 +963,7 @@
 
      /* <-10->[8]<-4->Text<-10-> */
      $MaxWidth = 0; $MaxHeight = 8;
-     foreach($DataDescription["Description"] as $Key => $Value)
+     foreach($DataDescription["Description"] as $Value)
       {
        $Position   = imageftbbox($this->FontSize,0,$this->FontName,$Value);
        $TextWidth  = $Position[2]-$Position[0];
@@ -1929,7 +1929,7 @@
      if ( $YZero > $this->GArea_Y2 ) { $YZero = $this->GArea_Y2; }
 
      $SerieID = 0;
-     foreach ( $DataDescription["Values"] as $Key2 => $ColName )
+     foreach ( $DataDescription["Values"] as $ColName )
       {
        $ID = 0;
        foreach ( $DataDescription["Description"] as $keyI => $ValueI )
@@ -1982,7 +1982,7 @@
      if ( $YZero > $this->GArea_Y2 ) { $YZero = $this->GArea_Y2; }
 
      $SerieID = 0; $LastValue = "";
-     foreach ( $DataDescription["Values"] as $Key2 => $ColName )
+     foreach ( $DataDescription["Values"] as $ColName )
       {
        $ID = 0;
        foreach ( $DataDescription["Description"] as $keyI => $ValueI )
@@ -3406,7 +3406,7 @@
       }
      else
       {
-       foreach($this->ImageMap as $Key => $Value)
+       foreach($this->ImageMap as $Value)
         fwrite($Handle, htmlentities($Value)."\r");
       }
      fclose ($Handle);

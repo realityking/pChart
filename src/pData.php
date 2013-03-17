@@ -136,7 +136,7 @@
       }
      else
       {
-       foreach($Value as $key => $Val)
+       foreach($Value as $Val)
         {
          $this->Data[$ID][$Serie] = $Val;
          if (!isset($this->Data[$ID]["Name"]))
@@ -155,7 +155,7 @@
      else
       {
        $Found = FALSE;
-       foreach($this->DataDescription["Values"] as $key => $Value )
+       foreach($this->DataDescription["Values"] as $Value )
         if ( $Value == $SerieName ) { $Found = TRUE; }
 
        if ( !$Found )
@@ -182,7 +182,6 @@
      if ( !isset($this->DataDescription["Values"]) )
       return(0);
 
-     $Found = FALSE;
      foreach($this->DataDescription["Values"] as $key => $Value )
       {
        if ( $Value == $SerieName )
