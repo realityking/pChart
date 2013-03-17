@@ -3,12 +3,14 @@
 	<property name="source" value="src" />
 
 	<target name="clean" description="Cleanup build artifacts">
+		<delete dir="${basedir}/build/api"/>
 		<delete dir="${basedir}/build/code-browser"/>
 		<delete dir="${basedir}/build/logs"/>
 		<delete dir="${basedir}/build/pdepend"/>
 	</target>
 
 	<target name="prepare" depends="clean" description="Prepare for build">
+		<mkdir dir="${basedir}/build/api"/>
 		<mkdir dir="${basedir}/build/code-browser"/>
 		<mkdir dir="${basedir}/build/logs"/>
 		<mkdir dir="${basedir}/build/pdepend"/>
@@ -116,6 +118,15 @@
 			<arg path="${basedir}/src" />
 			<arg value="--output" />
 			<arg path="${basedir}/build/code-browser" />
+		</exec>
+	</target>
+
+	<target name="phpdoc" description="Generate API documentation.">
+		<exec executable="phpdoc">
+			<arg value="-d"/>
+			<arg value="${basedir}"/>
+<arg value="-t"/>
+			<arg value="${basedir}/build/api/"/>
 		</exec>
 	</target>
 </project>
