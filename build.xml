@@ -125,7 +125,7 @@
 	<target name="phpdoc" description="Generate API documentation.">
 		<exec executable="phpdoc">
 			<arg value="-d"/>
-			<arg value="${basedir}"/>
+			<arg value="${basedir}/src"/>
 <arg value="-t"/>
 			<arg value="${basedir}/build/api/"/>
 		</exec>
