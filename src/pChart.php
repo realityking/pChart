@@ -115,8 +115,9 @@ define("ALIGN_BOTTOM_LEFT", 7);
 define("ALIGN_BOTTOM_CENTER", 8);
 define("ALIGN_BOTTOM_RIGHT", 9);
 
-/* pChart class definition */
-
+/**
+ * pChart class definition
+ */
 class pChart
 {
 	/* Palettes definition */
@@ -196,8 +197,12 @@ class pChart
 	var $tmpFolder = "tmp/";
 	var $MapID = NULL;
 
-	/* This function create the background picture */
-
+	/**
+	 * This function create the background picture
+	 * 
+	 * @param   int  $XSize
+	 * @param   int  $YSize
+	 */
 	function __construct($XSize, $YSize)
 	{
 		$this->XSize = $XSize;
@@ -210,22 +215,45 @@ class pChart
 
 		$this->setFontProperties("tahoma.ttf", 8);
 	}
-	/* Set if warnings should be reported */
 
+	/**
+	 * Set if warnings should be reported
+	 * 
+	 * @param   string  $Interface
+	 * 
+	 * @return  void
+	 */
 	function reportWarnings($Interface = "CLI")
 	{
 		$this->ErrorReporting = TRUE;
 		$this->ErrorInterface = $Interface;
 	}
-	/* Set the font properties */
 
+	/**
+	 * Set the font properties
+	 * 
+	 * @param type $FontName
+	 * @param type $FontSize
+	 */
 	function setFontProperties($FontName, $FontSize)
 	{
 		$this->FontName = $FontName;
 		$this->FontSize = $FontSize;
 	}
-	/* Set the shadow properties */
 
+	/**
+	 * Set the shadow properties
+	 * 
+	 * @param   int  $XDistance
+	 * @param   int  $YDistance
+	 * @param   int  $R
+	 * @param   int  $G
+	 * @param   int  $B
+	 * @param   int  $Alpha
+	 * @param   int  $Blur
+	 * 
+	 * @return  void
+	 */
 	function setShadowProperties($XDistance = 1, $YDistance = 1, $R = 60, $G = 60, $B = 60, $Alpha = 50, $Blur = 0)
 	{
 		$this->ShadowActive = TRUE;
@@ -237,14 +265,27 @@ class pChart
 		$this->ShadowAlpha = $Alpha;
 		$this->ShadowBlur = $Blur;
 	}
-	/* Remove shadow option */
 
+	/**
+	 * Remove shadow option
+	 * 
+	 * @return  void
+	 */
 	function clearShadow()
 	{
 		$this->ShadowActive = FALSE;
 	}
-	/* Set Palette color */
 
+	/**
+	 * Set Palette color
+	 * 
+	 * @param   type  $ID
+	 * @param   int   $R
+	 * @param   int   $G
+	 * @param   int   $B
+	 * 
+	 * @return  void
+	 */
 	function setColorPalette($ID, $R, $G, $B)
 	{
 		if ($R < 0) {
@@ -267,8 +308,20 @@ class pChart
 		$this->Palette[$ID]["G"] = $G;
 		$this->Palette[$ID]["B"] = $B;
 	}
-	/* Create a color palette shading from one color to another */
 
+	/**
+	 * Create a color palette shading from one color to another
+	 * 
+	 * @param   int  $R1
+	 * @param   int  $G1
+	 * @param   int  $B1
+	 * @param   int  $R2
+	 * @param   int  $G2
+	 * @param   int  $B2
+	 * @param   int  $Shades
+	 * 
+	 * @return  void
+	 */
 	function createColorGradientPalette($R1, $G1, $B1, $R2, $G2, $B2, $Shades)
 	{
 		$RFactor = ($R2 - $R1) / $Shades;
@@ -281,8 +334,15 @@ class pChart
 			$this->Palette[$i]["B"] = $B1 + $BFactor * $i;
 		}
 	}
-	/* Load Color Palette from file */
 
+	/**
+	 * Load Color Palette from file
+	 * 
+	 * @param   string  $FileName
+	 * @param   string  $Delimiter
+	 * 
+	 * @return  void
+	 */
 	function loadColorPalette($FileName, $Delimiter = ",")
 	{
 		$handle = @fopen($FileName, "r");
@@ -302,21 +362,41 @@ class pChart
 			}
 		}
 	}
-	/* Set line style */
 
+	/**
+	 * Set line style
+	 * 
+	 * @param   int   $Width
+	 * @param   int   $DotSize
+	 * 
+	 * @return  void
+	 */
 	function setLineStyle($Width = 1, $DotSize = 0)
 	{
 		$this->LineWidth = $Width;
 		$this->LineDotSize = $DotSize;
 	}
-	/* Set currency symbol */
 
+	/**
+	 * Set currency symbol
+	 * 
+	 * @param type $Currency
+	 */
 	function setCurrency($Currency)
 	{
 		$this->Currency = $Currency;
 	}
-	/* Set the graph area location */
 
+	/**
+	 * Set the graph area location
+	 * 
+	 * @param   int  $X1
+	 * @param   int  $Y1
+	 * @param   int  $X2
+	 * @param   int  $Y2
+	 * 
+	 * @return  void
+	 */
 	function setGraphArea($X1, $Y1, $X2, $Y2)
 	{
 		$this->GArea_X1 = $X1;
@@ -324,8 +404,17 @@ class pChart
 		$this->GArea_X2 = $X2;
 		$this->GArea_Y2 = $Y2;
 	}
-	/* Prepare the graph area */
 
+	/**
+	 * Prepare the graph area
+	 * 
+	 * @param   int   $R
+	 * @param   int   $G
+	 * @param   int   $B
+	 * @param   bool  $Stripe
+	 * 
+	 * @return  void
+	 */
 	function drawGraphArea($R, $G, $B, $Stripe = FALSE)
 	{
 		$this->drawFilledRectangle($this->GArea_X1, $this->GArea_Y1, $this->GArea_X2, $this->GArea_Y2, $R, $G, $B, FALSE);
@@ -370,8 +459,12 @@ class pChart
 			}
 		}
 	}
-	/* Allow you to clear the scale : used if drawing multiple charts */
 
+	/**
+	 * Allow you to clear the scale : used if drawing multiple charts
+	 * 
+	 * @return  void
+	 */
 	function clearScale()
 	{
 		$this->VMin = NULL;
@@ -381,8 +474,19 @@ class pChart
 		$this->Divisions = NULL;
 		$this->XDivisions = NULL;
 	}
-	/* Allow you to fix the scale, use this to bypass the automatic scaling */
 
+	/**
+	 * Allow you to fix the scale, use this to bypass the automatic scaling
+	 * 
+	 * @param   int  $VMin
+	 * @param   int  $VMax
+	 * @param   int  $Divisions
+	 * @param   int  $VXMin
+	 * @param   int  $VXMax
+	 * @param   int  $XDivisions
+	 * 
+	 * @return  void
+	 */
 	function setFixedScale($VMin, $VMax, $Divisions = 5, $VXMin = 0, $VXMax = 0, $XDivisions = 5)
 	{
 		$this->VMin = $VMin;
@@ -395,14 +499,47 @@ class pChart
 			$this->XDivisions = $XDivisions;
 		}
 	}
-	/* Wrapper to the drawScale() function allowing a second scale to be drawn */
 
+	/**
+	 * Wrapper to the drawScale() function allowing a second scale to be drawn
+	 * 
+	 * @param   type  $Data
+	 * @param   type  $DataDescription
+	 * @param   type  $ScaleMode
+	 * @param   int   $R
+	 * @param   int   $G
+	 * @param   int   $B
+	 * @param   bool  $DrawTicks
+	 * @param   int   $Angle
+	 * @param   int   $Decimals
+	 * @param   bool  $WithMargin
+	 * @param   type  $SkipLabels
+	 * 
+	 * @return  void
+	 */
 	function drawRightScale($Data, $DataDescription, $ScaleMode, $R, $G, $B, $DrawTicks = TRUE, $Angle = 0, $Decimals = 1, $WithMargin = FALSE, $SkipLabels = 1)
 	{
 		$this->drawScale($Data, $DataDescription, $ScaleMode, $R, $G, $B, $DrawTicks, $Angle, $Decimals, $WithMargin, $SkipLabels, TRUE);
 	}
-	/* Compute and draw the scale */
 
+	/**
+	 * Compute and draw the scale
+	 * 
+	 * @param   type  $Data
+	 * @param   type  $DataDescription
+	 * @param   type  $ScaleMode
+	 * @param   int   $R
+	 * @param   int   $G
+	 * @param   int   $B
+	 * @param   bool  $DrawTicks
+	 * @param   int   $Angle
+	 * @param   int   $Decimals
+	 * @param   bool  $WithMargin
+	 * @param   type  $SkipLabels
+	 * @param   bool  $RightScale
+	 * 
+	 * @return  type
+	 */
 	function drawScale($Data, $DataDescription, $ScaleMode, $R, $G, $B, $DrawTicks = TRUE, $Angle = 0, $Decimals = 1, $WithMargin = FALSE, $SkipLabels = 1, $RightScale = FALSE)
 	{
 		/* Validate the Data and DataDescription array */
@@ -681,8 +818,23 @@ class pChart
 			imagettftext($this->Picture, $this->FontSize, 0, $TextLeft, $YMax + $this->FontSize + 5, $C_TextColor, $this->FontName, $DataDescription["Axis"]["X"]);
 		}
 	}
-	/* Compute and draw the scale for X/Y charts */
 
+	/**
+	 * Compute and draw the scale for X/Y charts
+	 * 
+	 * @param   type  $Data
+	 * @param   type  $DataDescription
+	 * @param   type  $YSerieName
+	 * @param   type  $XSerieName
+	 * @param   int   $R
+	 * @param   int   $G
+	 * @param   int   $B
+	 * @param   type  $WithMargin
+	 * @param   int   $Angle
+	 * @param   int   $Decimals
+	 * 
+	 * @return  void
+	 */
 	function drawXYScale($Data, $DataDescription, $YSerieName, $XSerieName, $R, $G, $B, $WithMargin = 0, $Angle = 0, $Decimals = 1)
 	{
 		/* Validate the Data and DataDescription array */
@@ -977,8 +1129,19 @@ class pChart
 			imagettftext($this->Picture, $this->FontSize, 0, $TextLeft, $YMax + $this->FontSize + 5, $C_TextColor, $this->FontName, $DataDescription["Axis"]["X"]);
 		}
 	}
-	/* Compute and draw the scale */
 
+	/**
+	 * Compute and draw the scale
+	 * 
+	 * @param   type  $LineWidth
+	 * @param   bool  $Mosaic
+	 * @param   int   $R
+	 * @param   int   $G
+	 * @param   int   $B
+	 * @param   int   $Alpha
+	 * 
+	 * @return  void
+	 */
 	function drawGrid($LineWidth, $Mosaic = TRUE, $R = 220, $G = 220, $B = 220, $Alpha = 100)
 	{
 		/* Draw mosaic */
@@ -1036,8 +1199,14 @@ class pChart
 			$XPos = $XPos + $this->DivisionWidth;
 		}
 	}
-	/* retrieve the legends size */
 
+	/**
+	 * retrieve the legends size
+	 * 
+	 * @param   array  $DataDescription
+	 * 
+	 * @return  array
+	 */
 	function getLegendBoxSize($DataDescription)
 	{
 		if (!isset($DataDescription["Description"]))
@@ -1060,8 +1229,26 @@ class pChart
 
 		return(array($MaxWidth, $MaxHeight));
 	}
-	/* Draw the data legends */
 
+	/**
+	 * Draw the data legends
+	 * 
+	 * @param   int   $XPos
+	 * @param   int   $YPos
+	 * @param   type  $DataDescription
+	 * @param   int   $R
+	 * @param   int   $G
+	 * @param   int   $B
+	 * @param   int   $Rs
+	 * @param   int   $Gs
+	 * @param   int   $Bs
+	 * @param   int   $Rt
+	 * @param   int   $Gt
+	 * @param   int   $Bt
+	 * @param   bool  $Border
+	 * 
+	 * @return  type
+	 */
 	function drawLegend($XPos, $YPos, $DataDescription, $R, $G, $B, $Rs = -1, $Gs = -1, $Bs = -1, $Rt = 0, $Gt = 0, $Bt = 0, $Border = TRUE)
 	{
 		/* Validate the Data and DataDescription array */
@@ -1111,8 +1298,20 @@ class pChart
 			$ID++;
 		}
 	}
-	/* Draw the data legends */
 
+	/**
+	 * Draw the data legends
+	 * 
+	 * @param   int   $XPos
+	 * @param   int   $YPos
+	 * @param   type  $Data
+	 * @param   type  $DataDescription
+	 * @param   int   $R
+	 * @param   int   $G
+	 * @param   int   $B
+	 * 
+	 * @return  type
+	 */
 	function drawPieLegend($XPos, $YPos, $Data, $DataDescription, $R, $G, $B)
 	{
 		/* Validate the Data and DataDescription array */
@@ -1157,8 +1356,22 @@ class pChart
 			$ID++;
 		}
 	}
-	/* Draw the graph title */
 
+	/**
+	 * Draw the graph title
+	 * 
+	 * @param   int   $XPos
+	 * @param   int   $YPos
+	 * @param   type  $Value
+	 * @param   int   $R
+	 * @param   int   $G
+	 * @param   int   $B
+	 * @param   int   $XPos2
+	 * @param   int   $YPos2
+	 * @param   bool  $Shadow
+	 * 
+	 * @return  void
+	 */
 	function drawTitle($XPos, $YPos, $Value, $R, $G, $B, $XPos2 = -1, $YPos2 = -1, $Shadow = FALSE)
 	{
 		$C_TextColor = $this->AllocateColor($this->Picture, $R, $G, $B);
@@ -1182,8 +1395,28 @@ class pChart
 
 		imagettftext($this->Picture, $this->FontSize, 0, $XPos, $YPos, $C_TextColor, $this->FontName, $Value);
 	}
-	/* Draw a text box with text align & alpha properties */
 
+	/**
+	 * Draw a text box with text align & alpha properties
+	 * 
+	 * @param   int     $X1
+	 * @param   int     $Y1
+	 * @param   int     $X2
+	 * @param   int     $Y2
+	 * @param   string  $Text
+	 * @param   int     $Angle
+	 * @param   int     $R
+	 * @param   int     $G
+	 * @param   int     $B
+	 * @param   type    $Align
+	 * @param   bool    $Shadow
+	 * @param   int     $BgR
+	 * @param   int     $BgG
+	 * @param   int     $BgB
+	 * @param   int     $Alpha
+	 * 
+	 * @return  void
+	 */
 	function drawTextBox($X1, $Y1, $X2, $Y2, $Text, $Angle = 0, $R = 255, $G = 255, $B = 255, $Align = ALIGN_LEFT, $Shadow = TRUE, $BgR = -1, $BgG = -1, $BgB = -1, $Alpha = 100)
 	{
 		$Position = imageftbbox($this->FontSize, $Angle, $this->FontName, $Text);
@@ -1239,8 +1472,21 @@ class pChart
 
 		imagettftext($this->Picture, $this->FontSize, $Angle, $X, $Y, $C_TextColor, $this->FontName, $Text);
 	}
-	/* Compute and draw the scale */
 
+	/**
+	 * Compute and draw the scale
+	 * 
+	 * @param   type  $Value
+	 * @param   int   $R
+	 * @param   int   $G
+	 * @param   int   $B
+	 * @param   bool  $ShowLabel
+	 * @param   bool  $ShowOnRight
+	 * @param   int   $TickWidth
+	 * @param   type  $FreeText
+	 * 
+	 * @return  type
+	 */
 	function drawTreshold($Value, $R, $G, $B, $ShowLabel = FALSE, $ShowOnRight = FALSE, $TickWidth = 4, $FreeText = NULL)
 	{
 		if ($R < 0) {
@@ -1284,8 +1530,21 @@ class pChart
 				imagettftext($this->Picture, $this->FontSize, 0, $this->GArea_X1 + 2, $Y - ($this->FontSize / 2), $C_TextColor, $this->FontName, $Label);
 		}
 	}
-	/* This function put a label on a specific point */
 
+	/**
+	 * This function put a label on a specific point
+	 * 
+	 * @param   type  $Data
+	 * @param   type  $DataDescription
+	 * @param   type  $SerieName
+	 * @param   type  $ValueName
+	 * @param   type  $Caption
+	 * @param   int   $R
+	 * @param   int   $G
+	 * @param   int   $B
+	 * 
+	 * @return  void
+	 */
 	function setLabel($Data, $DataDescription, $SerieName, $ValueName, $Caption, $R = 210, $G = 210, $B = 210)
 	{
 		/* Validate the Data and DataDescription array */
@@ -1331,8 +1590,21 @@ class pChart
 
 		imagettftext($this->Picture, $this->FontSize, 0, $XPos + 10, $YPos + $TextOffset, $C_TextColor, $this->FontName, $Caption);
 	}
-	/* This function draw a plot graph */
 
+	/**
+	 * This function draw a plot graph
+	 * 
+	 * @param   type  $Data
+	 * @param   type  $DataDescription
+	 * @param   int   $BigRadius
+	 * @param   int   $SmallRadius
+	 * @param   int   $R2
+	 * @param   int   $G2
+	 * @param   int   $B2
+	 * @param   bool  $Shadow
+	 * 
+	 * @return  void
+	 */
 	function drawPlotGraph($Data, $DataDescription, $BigRadius = 5, $SmallRadius = 2, $R2 = -1, $G2 = -1, $B2 = -1, $Shadow = FALSE)
 	{
 		/* Validate the Data and DataDescription array */
@@ -1438,8 +1710,24 @@ class pChart
 			$GraphID++;
 		}
 	}
-	/* This function draw a plot graph in an X/Y space */
 
+	/**
+	 * This function draw a plot graph in an X/Y space
+	 * 
+	 * @param   type  $Data
+	 * @param   type  $DataDescription
+	 * @param   type  $YSerieName
+	 * @param   type  $XSerieName
+	 * @param   type  $PaletteID
+	 * @param   int   $BigRadius
+	 * @param   int   $SmallRadius
+	 * @param   int   $R2
+	 * @param   int   $G2
+	 * @param   int   $B2
+	 * @param   bool  $Shadow
+	 * 
+	 * @return  void
+	 */
 	function drawXYPlotGraph($Data, $DataDescription, $YSerieName, $XSerieName, $PaletteID = 0, $BigRadius = 5, $SmallRadius = 2, $R2 = -1, $G2 = -1, $B2 = -1, $Shadow = TRUE)
 	{
 		$R = $this->Palette[$PaletteID]["R"];
@@ -1502,8 +1790,20 @@ class pChart
 			}
 		}
 	}
-	/* This function draw an area between two series */
 
+	/**
+	 * This function draw an area between two series
+	 * 
+	 * @param   type  $Data
+	 * @param   type  $Serie1
+	 * @param   type  $Serie2
+	 * @param   int   $R
+	 * @param   int   $G
+	 * @param   int   $B
+	 * @param   int   $Alpha
+	 * 
+	 * @return  void
+	 */
 	function drawArea($Data, $Serie1, $Serie2, $R, $G, $B, $Alpha = 50)
 	{
 		/* Validate the Data and DataDescription array */
@@ -1551,8 +1851,16 @@ class pChart
 		imagecopymerge($this->Picture, $this->Layers[0], $this->GArea_X1, $this->GArea_Y1, 0, 0, $LayerWidth, $LayerHeight, $Alpha);
 		imagedestroy($this->Layers[0]);
 	}
-	/* This function write the values of the specified series */
 
+	/**
+	 * This function write the values of the specified series
+	 * 
+	 * @param   type  $Data
+	 * @param   type  $DataDescription
+	 * @param   type  $Series
+	 * 
+	 * @return  void
+	 */
 	function writeValues($Data, $DataDescription, $Series)
 	{
 		/* Validate the Data and DataDescription array */
@@ -1592,8 +1900,16 @@ class pChart
 			}
 		}
 	}
-	/* This function draw a line graph */
 
+	/**
+	 * This function draw a line graph
+	 * 
+	 * @param   type  $Data
+	 * @param   type  $DataDescription
+	 * @param   type  $SerieName
+	 * 
+	 * @return  void
+	 */
 	function drawLineGraph($Data, $DataDescription, $SerieName = "")
 	{
 		/* Validate the Data and DataDescription array */
@@ -1640,8 +1956,18 @@ class pChart
 			}
 		}
 	}
-	/* This function draw a line graph */
 
+	/**
+	 * This function draw a line graph
+	 * 
+	 * @param   type  $Data
+	 * @param   type  $DataDescription
+	 * @param   type  $YSerieName
+	 * @param   type  $XSerieName
+	 * @param   type  $PaletteID
+	 * 
+	 * @return  void
+	 */
 	function drawXYGraph($Data, $DataDescription, $YSerieName, $XSerieName, $PaletteID = 0)
 	{
 		$YLast = -1;
@@ -1663,8 +1989,17 @@ class pChart
 			}
 		}
 	}
-	/* This function draw a cubic curve */
 
+	/**
+	 * This function draw a cubic curve
+	 * 
+	 * @param   type    $Data
+	 * @param   type    $DataDescription
+	 * @param   float   $Accuracy
+	 * @param   string  $SerieName
+	 * 
+	 * @return  void
+	 */
 	function drawCubicCurve($Data, $DataDescription, $Accuracy = .1, $SerieName = "")
 	{
 		/* Validate the Data and DataDescription array */
@@ -1763,8 +2098,18 @@ class pChart
 			}
 		}
 	}
-	/* This function draw a filled cubic curve */
 
+	/**
+	 * This function draw a filled cubic curve
+	 * 
+	 * @param   type   $Data
+	 * @param   type   $DataDescription
+	 * @param   float  $Accuracy
+	 * @param   int    $Alpha
+	 * @param   bool   $AroundZero
+	 * 
+	 * @return  void
+	 */
 	function drawFilledCubicCurve($Data, $DataDescription, $Accuracy = .1, $Alpha = 100, $AroundZero = FALSE)
 	{
 		/* Validate the Data and DataDescription array */
@@ -1933,8 +2278,17 @@ class pChart
 			$GraphID++;
 		}
 	}
-	/* This function draw a filled line graph */
 
+	/**
+	 * This function draw a filled line graph
+	 * 
+	 * @param   type  $Data
+	 * @param   type  $DataDescription
+	 * @param   int   $Alpha
+	 * @param   bool  $AroundZero
+	 * 
+	 * @return  void
+	 */
 	function drawFilledLineGraph($Data, $DataDescription, $Alpha = 100, $AroundZero = FALSE)
 	{
 		$Empty = -2147483647;
@@ -2037,8 +2391,16 @@ class pChart
 			$this->drawLineGraph($Data, $DataDescription, $ColName);
 		}
 	}
-	/* This function draw a bar graph */
 
+	/**
+	 * This function draw a bar graph
+	 * 
+	 * @param   type  $Data
+	 * @param   type  $DataDescription
+	 * @param   int   $Alpha
+	 * 
+	 * @return  void
+	 */
 	function drawOverlayBarGraph($Data, $DataDescription, $Alpha = 50)
 	{
 		/* Validate the Data and DataDescription array */
@@ -2106,8 +2468,17 @@ class pChart
 			imagedestroy($this->Layers[$i]);
 		}
 	}
-	/* This function draw a bar graph */
 
+	/**
+	 * This function draw a bar graph
+	 * 
+	 * @param   type  $Data
+	 * @param   type  $DataDescription
+	 * @param   bool  $Shadow
+	 * @param   int   $Alpha
+	 * 
+	 * @return  void
+	 */
 	function drawBarGraph($Data, $DataDescription, $Shadow = FALSE, $Alpha = 100)
 	{
 		/* Validate the Data and DataDescription array */
@@ -2158,8 +2529,17 @@ class pChart
 			$SerieID++;
 		}
 	}
-	/* This function draw a stacked bar graph */
 
+	/**
+	 * This function draw a stacked bar graph
+	 * 
+	 * @param   type  $Data
+	 * @param   type  $DataDescription
+	 * @param   int   $Alpha
+	 * @param   bool  $Contiguous
+	 * 
+	 * @return  void
+	 */
 	function drawStackedBarGraph($Data, $DataDescription, $Alpha = 50, $Contiguous = FALSE)
 	{
 		/* Validate the Data and DataDescription array */
@@ -2219,8 +2599,18 @@ class pChart
 			$SerieID++;
 		}
 	}
-	/* This function draw a limits bar graphs */
 
+	/**
+	 * This function draw a limits bar graphs
+	 * 
+	 * @param   type  $Data
+	 * @param   type  $DataDescription
+	 * @param   int   $R
+	 * @param   int   $G
+	 * @param   int   $B
+	 * 
+	 * @return  void
+	 */
 	function drawLimitsGraph($Data, $DataDescription, $R = 0, $G = 0, $B = 0)
 	{
 		/* Validate the Data and DataDescription array */
@@ -2274,8 +2664,24 @@ class pChart
 			$XPos = $XPos + $this->DivisionWidth;
 		}
 	}
-	/* This function draw radar axis centered on the graph area */
 
+	/**
+	 * This function draw radar axis centered on the graph area
+	 * 
+	 * @param   type  $Data
+	 * @param   type  $DataDescription
+	 * @param   bool  $Mosaic
+	 * @param   int   $BorderOffset
+	 * @param   int   $A_R
+	 * @param   int   $A_G
+	 * @param   int   $A_B
+	 * @param   int   $S_R
+	 * @param   int   $S_G
+	 * @param   int   $S_B
+	 * @param   int   $MaxValue
+	 * 
+	 * @return  void
+	 */
 	function drawRadarAxis($Data, $DataDescription, $Mosaic = TRUE, $BorderOffset = 10, $A_R = 60, $A_G = 60, $A_B = 60, $S_R = 200, $S_G = 200, $S_B = 200, $MaxValue = -1)
 	{
 		/* Validate the Data and DataDescription array */
@@ -2413,8 +2819,17 @@ class pChart
 			imagettftext($this->Picture, $this->FontSize, 0, $X, $Y, $C_TextColor, $this->FontName, $t);
 		}
 	}
-	/* This function draw a radar graph centered on the graph area */
 
+	/**
+	 * This function draw a radar graph centered on the graph area
+	 * 
+	 * @param   type  $Data
+	 * @param   type  $DataDescription
+	 * @param   int   $BorderOffset
+	 * @param   int   $MaxValue
+	 * 
+	 * @return  void
+	 */
 	function drawRadar($Data, $DataDescription, $BorderOffset = 10, $MaxValue = -1)
 	{
 		/* Validate the Data and DataDescription array */
@@ -2475,8 +2890,18 @@ class pChart
 			$GraphID++;
 		}
 	}
-	/* This function draw a radar graph centered on the graph area */
 
+	/**
+	 * This function draw a radar graph centered on the graph area
+	 * 
+	 * @param   type  $Data
+	 * @param   type  $DataDescription
+	 * @param   int   $Alpha
+	 * @param   int   $BorderOffset
+	 * @param   int   $MaxValue
+	 * 
+	 * @return  void
+	 */
 	function drawFilledRadar($Data, $DataDescription, $Alpha = 50, $BorderOffset = 10, $MaxValue = -1)
 	{
 		/* Validate the Data and DataDescription array */
@@ -2557,8 +2982,23 @@ class pChart
 			$GraphID++;
 		}
 	}
-	/* This function draw a flat pie chart */
 
+	/**
+	 * This function draw a flat pie chart
+	 * 
+	 * @param   type  $Data
+	 * @param   type  $DataDescription
+	 * @param   int   $XPos
+	 * @param   int   $YPos
+	 * @param   int   $Radius
+	 * @param   type  $DrawLabels
+	 * @param   int   $R
+	 * @param   int   $G
+	 * @param   int   $B
+	 * @param   int   $Decimals
+	 * 
+	 * @return  void
+	 */
 	function drawBasicPieGraph($Data, $DataDescription, $XPos, $YPos, $Radius = 100, $DrawLabels = PIE_NOLABEL, $R = 255, $G = 255, $B = 255, $Decimals = 0)
 	{
 		/* Validate the Data and DataDescription array */
@@ -2668,8 +3108,22 @@ class pChart
 		$this->drawFlatPieGraph($Data, $DataDescription, $XPos + $this->ShadowXDistance, $YPos + $this->ShadowYDistance, $Radius, PIE_NOLABEL, $SpliceDistance, $Decimals, TRUE);
 		$this->drawFlatPieGraph($Data, $DataDescription, $XPos, $YPos, $Radius, $DrawLabels, $SpliceDistance, $Decimals, FALSE);
 	}
-	/* This function draw a flat pie chart */
 
+	/**
+	 * This function draw a flat pie chart
+	 * 
+	 * @param   type  $Data
+	 * @param   type  $DataDescription
+	 * @param   int   $XPos
+	 * @param   int   $YPos
+	 * @param   int   $Radius
+	 * @param   type  $DrawLabels
+	 * @param   int   $SpliceDistance
+	 * @param   int   $Decimals
+	 * @param   bool  $AllBlack
+	 * 
+	 * @return  type
+	 */
 	function drawFlatPieGraph($Data, $DataDescription, $XPos, $YPos, $Radius = 100, $DrawLabels = PIE_NOLABEL, $SpliceDistance = 0, $Decimals = 0, $AllBlack = FALSE)
 	{
 		/* Validate the Data and DataDescription array */
@@ -2800,8 +3254,24 @@ class pChart
 		}
 		$this->ShadowActive = $ShadowStatus;
 	}
-	/* This function draw a pseudo-3D pie chart */
 
+	/**
+	 * This function draw a pseudo-3D pie chart
+	 * 
+	 * @param   type  $Data
+	 * @param   type  $DataDescription
+	 * @param   int   $XPos
+	 * @param   int   $YPos
+	 * @param   int   $Radius
+	 * @param   type  $DrawLabels
+	 * @param   bool  $EnhanceColors
+	 * @param   int   $Skew
+	 * @param   int   $SpliceHeight
+	 * @param   int   $SpliceDistance
+	 * @param   int   $Decimals
+	 * 
+	 * @return  void
+	 */
 	function drawPieGraph($Data, $DataDescription, $XPos, $YPos, $Radius = 100, $DrawLabels = PIE_NOLABEL, $EnhanceColors = TRUE, $Skew = 60, $SpliceHeight = 20, $SpliceDistance = 0, $Decimals = 0)
 	{
 		/* Validate the Data and DataDescription array */
@@ -2988,8 +3458,16 @@ class pChart
 				$this->drawLine($aTopPlots[$Key][$j], $aTopPlots[$Key][$j + 1], $aTopPlots[$Key][$j + 2], $aTopPlots[$Key][$j + 3], $this->Palette[$Key]["R"] + $En, $this->Palette[$Key]["G"] + $En, $this->Palette[$Key]["B"] + $En);
 		}
 	}
-	/* This function can be used to set the background color */
 
+	/**
+	 * This function can be used to set the background color
+	 * 
+	 * @param   int  $R
+	 * @param   int  $G
+	 * @param   int  $B
+	 * 
+	 * @return  void
+	 */
 	function drawBackground($R, $G, $B)
 	{
 		if ($R < 0) {
@@ -3011,8 +3489,18 @@ class pChart
 		$C_Background = $this->AllocateColor($this->Picture, $R, $G, $B);
 		imagefilledrectangle($this->Picture, 0, 0, $this->XSize, $this->YSize, $C_Background);
 	}
-	/* This function can be used to set the background color */
 
+	/**
+	 * This function can be used to set the background color
+	 * 
+	 * @param   int   $R
+	 * @param   int   $G
+	 * @param   int   $B
+	 * @param   int   $Decay
+	 * @param   type  $Target
+	 * 
+	 * @return  void
+	 */
 	function drawGraphAreaGradient($R, $G, $B, $Decay, $Target = TARGET_GRAPHAREA)
 	{
 		if ($R < 0) {
@@ -3082,8 +3570,20 @@ class pChart
 			}
 		}
 	}
-	/* This function create a rectangle with antialias */
 
+	/**
+	 * This function create a rectangle with antialias
+	 * 
+	 * @param   int   $X1
+	 * @param   int   $Y1
+	 * @param   int   $X2
+	 * @param   int   $Y2
+	 * @param   int   $R
+	 * @param   int   $G
+	 * @param   int   $B
+	 * 
+	 * @return  void
+	 */
 	function drawRectangle($X1, $Y1, $X2, $Y2, $R, $G, $B)
 	{
 		if ($R < 0) {
@@ -3113,8 +3613,23 @@ class pChart
 		$this->drawLine($X2, $Y2, $X1, $Y2, $R, $G, $B);
 		$this->drawLine($X1, $Y2, $X1, $Y1, $R, $G, $B);
 	}
-	/* This function create a filled rectangle with antialias */
 
+	/**
+	 * This function create a filled rectangle with antialias
+	 * 
+	 * @param   int   $X1
+	 * @param   int   $Y1
+	 * @param   int   $X2
+	 * @param   int   $Y2
+	 * @param   int   $R
+	 * @param   int   $G
+	 * @param   int   $B
+	 * @param   bool  $DrawBorder
+	 * @param   int   $Alpha
+	 * @param   bool  $NoFallBack
+	 * 
+	 * @return  void
+	 */
 	function drawFilledRectangle($X1, $Y1, $X2, $Y2, $R, $G, $B, $DrawBorder = TRUE, $Alpha = 100, $NoFallBack = FALSE)
 	{
 		if ($X2 < $X1) {
@@ -3180,8 +3695,21 @@ class pChart
 			$this->ShadowActive = $ShadowSettings;
 		}
 	}
-	/* This function create a rectangle with rounded corners and antialias */
 
+	/**
+	 * This function create a rectangle with rounded corners and antialias
+	 * 
+	 * @param   int  $X1
+	 * @param   int  $Y1
+	 * @param   int  $X2
+	 * @param   int  $Y2
+	 * @param   int  $Radius
+	 * @param   int  $R
+	 * @param   int  $G
+	 * @param   int  $B
+	 * 
+	 * @return  void
+	 */
 	function drawRoundedRectangle($X1, $Y1, $X2, $Y2, $Radius, $R, $G, $B)
 	{
 		if ($R < 0) {
@@ -3231,8 +3759,21 @@ class pChart
 		$this->drawLine($X2 - $Radius, $Y2, $X1 + $Radius, $Y2, $R, $G, $B);
 		$this->drawLine($X1, $Y2 - $Radius, $X1, $Y1 + $Radius, $R, $G, $B);
 	}
-	/* This function create a filled rectangle with rounded corners and antialias */
 
+	/**
+	 * This function create a filled rectangle with rounded corners and antialias
+	 * 
+	 * @param   int  $X1
+	 * @param   int  $Y1
+	 * @param   int  $X2
+	 * @param   int  $Y2
+	 * @param   int  $Radius
+	 * @param   int  $R
+	 * @param   int  $G
+	 * @param   int  $B
+	 * 
+	 * @return  void
+	 */
 	function drawFilledRoundedRectangle($X1, $Y1, $X2, $Y2, $Radius, $R, $G, $B)
 	{
 		if ($R < 0) {
@@ -3291,8 +3832,20 @@ class pChart
 		$this->drawLine($X2 - $Radius, $Y2, $X1 + $Radius, $Y2, $R, $G, $B);
 		$this->drawLine($X1, $Y2 - $Radius, $X1, $Y1 + $Radius, $R, $G, $B);
 	}
-	/* This function create a circle with antialias */
 
+	/**
+	 * This function create a circle with antialias
+	 * 
+	 * @param   int  $Xc
+	 * @param   int  $Yc
+	 * @param   int  $Height
+	 * @param   int  $R
+	 * @param   int  $G
+	 * @param   int  $B
+	 * @param   int  $Width
+	 * 
+	 * @return  void
+	 */
 	function drawCircle($Xc, $Yc, $Height, $R, $G, $B, $Width = 0)
 	{
 		if ($Width == 0) {
@@ -3323,8 +3876,20 @@ class pChart
 			$this->drawAntialiasPixel($X, $Y, $R, $G, $B);
 		}
 	}
-	/* This function create a filled circle/ellipse with antialias */
 
+	/**
+	 * This function create a filled circle/ellipse with antialias
+	 * 
+	 * @param   int  $Xc
+	 * @param   int  $Yc
+	 * @param   int  $Height
+	 * @param   int  $R
+	 * @param   int  $G
+	 * @param   int  $B
+	 * @param   int  $Width
+	 * 
+	 * @return  void
+	 */
 	function drawFilledCircle($Xc, $Yc, $Height, $R, $G, $B, $Width = 0)
 	{
 		if ($Width == 0) {
@@ -3362,20 +3927,57 @@ class pChart
 				imageline($this->Picture, $X1, $Y1 - 1, $X2 - 1, $Y2 - 1, $C_Circle);
 		}
 	}
-	/* This function will draw a filled ellipse */
 
+	/**
+	 * This function will draw a filled ellipse
+	 * 
+	 * @param   int  $Xc
+	 * @param   int  $Yc
+	 * @param   int  $Height
+	 * @param   int  $Width
+	 * @param   int  $R
+	 * @param   int  $G
+	 * @param   int  $B
+	 * 
+	 * @return  void
+	 */
 	function drawEllipse($Xc, $Yc, $Height, $Width, $R, $G, $B)
 	{
 		$this->drawCircle($Xc, $Yc, $Height, $R, $G, $B, $Width);
 	}
-	/* This function will draw an ellipse */
 
+	/**
+	 * This function will draw an ellipse
+	 * 
+	 * @param   int  $Xc
+	 * @param   int  $Yc
+	 * @param   int  $Height
+	 * @param   int  $Width
+	 * @param   int  $R
+	 * @param   int  $G
+	 * @param   int  $B
+	 * 
+	 * @return  void
+	 */
 	function drawFilledEllipse($Xc, $Yc, $Height, $Width, $R, $G, $B)
 	{
 		$this->drawFilledCircle($Xc, $Yc, $Height, $R, $G, $B, $Width);
 	}
-	/* This function create a line with antialias */
 
+	/**
+	 * This function create a line with antialias
+	 * 
+	 * @param   int  $X1
+	 * @param   int  $Y1
+	 * @param   int  $X2
+	 * @param   int  $Y2
+	 * @param   int  $R
+	 * @param   int  $G
+	 * @param   int  $B
+	 * @param   type $GraphFunction
+	 * 
+	 * @return  type
+	 */
 	function drawLine($X1, $Y1, $X2, $Y2, $R, $G, $B, $GraphFunction = FALSE)
 	{
 		if ($this->LineDotSize > 1) {
@@ -3420,8 +4022,22 @@ class pChart
 			}
 		}
 	}
-	/* This function create a line with antialias */
 
+	/**
+	 * This function create a line with antialias
+	 * 
+	 * @param   int   $X1
+	 * @param   int   $Y1
+	 * @param   int   $X2
+	 * @param   int   $Y2
+	 * @param   int   $DotSize
+	 * @param   int   $R
+	 * @param   int   $G
+	 * @param   int   $B
+	 * @param   bool  $GraphFunction
+	 * 
+	 * @return  void
+	 */
 	function drawDottedLine($X1, $Y1, $X2, $Y2, $DotSize, $R, $G, $B, $GraphFunction = FALSE)
 	{
 		if ($R < 0) {
@@ -3468,26 +4084,63 @@ class pChart
 				$DotIndex = 0;
 		}
 	}
-	/* Load a PNG file and draw it over the chart */
 
+	/**
+	 * Load a PNG file and draw it over the chart
+	 * 
+	 * @param   string  $FileName
+	 * @param   int     $X
+	 * @param   int     $Y
+	 * @param   int     $Alpha
+	 * 
+	 * @return  void
+	 */
 	function drawFromPNG($FileName, $X, $Y, $Alpha = 100)
 	{
 		$this->drawFromPicture(1, $FileName, $X, $Y, $Alpha);
 	}
-	/* Load a GIF file and draw it over the chart */
 
+	/**
+	 * Load a GIF file and draw it over the chart
+	 * 
+	 * @param   string  $FileName
+	 * @param   int     $X
+	 * @param   int     $Y
+	 * @param   int     $Alpha
+	 * 
+	 * @return  void
+	 */
 	function drawFromGIF($FileName, $X, $Y, $Alpha = 100)
 	{
 		$this->drawFromPicture(2, $FileName, $X, $Y, $Alpha);
 	}
-	/* Load a JPEG file and draw it over the chart */
 
+	/**
+	 * Load a JPEG file and draw it over the chart
+	 * 
+	 * @param   string  $FileName
+	 * @param   int     $X
+	 * @param   int     $Y
+	 * @param   int     $Alpha
+	 * 
+	 * @return  void
+	 */
 	function drawFromJPG($FileName, $X, $Y, $Alpha = 100)
 	{
 		$this->drawFromPicture(3, $FileName, $X, $Y, $Alpha);
 	}
-	/* Generic loader function for external pictures */
 
+	/**
+	 * Generic loader function for external pictures
+	 * 
+	 * @param   type    $PicType
+	 * @param   string  $FileName
+	 * @param   int     $X
+	 * @param   int     $Y
+	 * @param   int     $Alpha
+	 * 
+	 * @return  void
+	 */
 	function drawFromPicture($PicType, $FileName, $X, $Y, $Alpha = 100)
 	{
 		if (file_exists($FileName)) {
@@ -3508,8 +4161,19 @@ class pChart
 			imagedestroy($Raster);
 		}
 	}
-	/* Draw an alpha pixel */
 
+	/**
+	 * Draw an alpha pixel
+	 * 
+	 * @param   int  $X
+	 * @param   int  $Y
+	 * @param   int  $Alpha
+	 * @param   int  $R
+	 * @param   int  $G
+	 * @param   int  $B
+	 * 
+	 * @return  type
+	 */
 	function drawAlphaPixel($X, $Y, $Alpha, $R, $G, $B)
 	{
 		if ($R < 0) {
@@ -3546,8 +4210,18 @@ class pChart
 		$C_Aliased = $this->AllocateColor($this->Picture, $Ra, $Ga, $Ba);
 		imagesetpixel($this->Picture, $X, $Y, $C_Aliased);
 	}
-	/* Color helper */
 
+	/**
+	 * Color helper
+	 * 
+	 * @param   resource  $Picture
+	 * @param   int       $R
+	 * @param   int       $G
+	 * @param   int       $B
+	 * @param   int       $Factor
+	 * 
+	 * @return  type
+	 */
 	function AllocateColor($Picture, $R, $G, $B, $Factor = 0)
 	{
 		$R = $R + $Factor;
@@ -3571,8 +4245,17 @@ class pChart
 
 		return(imagecolorallocate($Picture, $R, $G, $B));
 	}
-	/* Add a border to the picture */
 
+	/**
+	 * Add a border to the picture
+	 * 
+	 * @param   int  $Size
+	 * @param   int  $R
+	 * @param   int  $G
+	 * @param   int  $B
+	 * 
+	 * @return  void
+	 */
 	function addBorder($Size = 3, $R = 0, $G = 0, $B = 0)
 	{
 		$Width = $this->XSize + 2 * $Size;
@@ -3594,8 +4277,14 @@ class pChart
 		imagecolortransparent($this->Picture, $C_White);
 		imagecopy($this->Picture, $Resampled, 0, 0, 0, 0, $this->XSize, $this->YSize);
 	}
-	/* Render the current picture to a file */
 
+	/**
+	 * Render the current picture to a file
+	 * 
+	 * @param   string  $FileName
+	 * 
+	 * @return  void
+	 */
 	function Render($FileName)
 	{
 		if ($this->ErrorReporting)
@@ -3607,8 +4296,12 @@ class pChart
 
 		imagepng($this->Picture, $FileName);
 	}
-	/* Render the current picture to STDOUT */
 
+	/**
+	 * Render the current picture to STDOUT
+	 * 
+	 * @return  void
+	 */
 	function Stroke()
 	{
 		if ($this->ErrorReporting)
@@ -3621,8 +4314,20 @@ class pChart
 		header('Content-type: image/png');
 		imagepng($this->Picture);
 	}
-	/* Private functions for internal processing */
 
+	/**
+	 * Private functions for internal processing
+	 * 
+	 * @param   int   $X
+	 * @param   int   $Y
+	 * @param   int   $R
+	 * @param   int   $G
+	 * @param   int   $B
+	 * @param   int   $Alpha
+	 * @param   bool  $NoFallBack
+	 * 
+	 * @return  void
+	 */
 	function drawAntialiasPixel($X, $Y, $R, $G, $B, $Alpha = 100, $NoFallBack = FALSE)
 	{
 		/* Process shadows */
@@ -3688,8 +4393,16 @@ class pChart
 			}
 		}
 	}
-	/* Validate data contained in the description array */
 
+	/**
+	 * Validate data contained in the description array
+	 * 
+	 * @param   type  $FunctionName
+	 * @param   type  &$DataDescription
+	 * @param   bool  $DescriptionRequired
+	 * 
+	 * @return  void
+	 */
 	function validateDataDescription($FunctionName, &$DataDescription, $DescriptionRequired = TRUE)
 	{
 		if (!isset($DataDescription["Position"])) {
@@ -3714,8 +4427,15 @@ class pChart
 			}
 		}
 	}
-	/* Validate data contained in the data array */
 
+	/**
+	 * Validate data contained in the data array
+	 * 
+	 * @param   type  $FunctionName
+	 * @param   type  $Data
+	 * 
+	 * @return  void
+	 */
 	function validateData($FunctionName, &$Data)
 	{
 		$DataSummary = array();
@@ -3738,8 +4458,14 @@ class pChart
 			}
 		}
 	}
-	/* Print all error messages on the CLI or graphically */
 
+	/**
+	 * Print all error messages on the CLI or graphically
+	 * 
+	 * @param   string  $Mode
+	 * 
+	 * @return  type
+	 */
 	function printErrors($Mode = "CLI")
 	{
 		if (count($this->Errors) == 0)
@@ -3770,15 +4496,32 @@ class pChart
 			}
 		}
 	}
-	/* Activate the image map creation process */
 
+	/**
+	 * Activate the image map creation process
+	 * 
+	 * @param   type  $Mode
+	 * @param   type  $GraphID
+	 * 
+	 * @return  void
+	 */
 	function setImageMap($Mode = TRUE, $GraphID = "MyGraph")
 	{
 		$this->BuildMap = $Mode;
 		$this->MapID = $GraphID;
 	}
-	/* Add a box into the image map */
 
+	/**
+	 * Add a box into the image map
+	 * 
+	 * @param   int   $X1
+	 * @param   int   $Y1
+	 * @param   int   $X2
+	 * @param   int   $Y2
+	 * @param   type  $SerieName
+	 * @param   type  $Value
+	 * @param   type  $CallerFunction
+	 */
 	function addToImageMap($X1, $Y1, $X2, $Y2, $SerieName, $Value, $CallerFunction)
 	{
 		if ($this->MapFunction == NULL || $this->MapFunction == $CallerFunction) {
@@ -3786,8 +4529,15 @@ class pChart
 			$this->MapFunction = $CallerFunction;
 		}
 	}
-	/* Load and cleanup the image map from disk */
 
+	/**
+	 * Load and cleanup the image map from disk
+	 * 
+	 * @param   type  $MapName
+	 * @param   bool  $Flush
+	 * 
+	 * @return  void
+	 */
 	function getImageMap($MapName, $Flush = TRUE)
 	{
 		/* Strip HTML query strings */
@@ -3811,8 +4561,12 @@ class pChart
 			exit();
 		}
 	}
-	/* Save the image map to the disk */
 
+	/**
+	 * Save the image map to the disk
+	 * 
+	 * @return  type
+	 */
 	function SaveImageMap()
 	{
 		if (!$this->BuildMap) {
@@ -3835,8 +4589,14 @@ class pChart
 		}
 		fclose($Handle);
 	}
-	/* Convert seconds to a time format string */
 
+	/**
+	 * Convert seconds to a time format string
+	 * 
+	 * @param   int  $Value
+	 * 
+	 * @return  type
+	 */
 	function ToTime($Value)
 	{
 		$Hour = floor($Value / 3600);
@@ -3855,8 +4615,14 @@ class pChart
 
 		return($Hour . ":" . $Minute . ":" . $Second);
 	}
-	/* Convert to metric system */
 
+	/**
+	 * Convert to metric system
+	 * 
+	 * @param   int  $Value
+	 * 
+	 * @return  type
+	 */
 	function ToMetric($Value)
 	{
 		$Go = floor($Value / 1000000000);
@@ -3875,8 +4641,14 @@ class pChart
 		}
 		return($o);
 	}
-	/* Convert to curency */
 
+	/**
+	 * Convert to curency
+	 * 
+	 * @param   int  $Value
+	 * 
+	 * @return  type
+	 */
 	function ToCurrency($Value)
 	{
 		$Go = floor($Value / 1000000000);
@@ -3905,20 +4677,38 @@ class pChart
 		$ResultString = $this->Currency . $ResultString;
 		return($ResultString);
 	}
-	/* Set date format for axis labels */
 
+	/**
+	 * Set date format for axis labels
+	 * 
+	 * @param   type  $Format
+	 * 
+	 * @return  void
+	 */
 	function setDateFormat($Format)
 	{
 		$this->DateFormat = $Format;
 	}
-	/* Convert TS to a date format string */
 
+	/**
+	 * Convert TS to a date format string
+	 * 
+	 * @param   type  $Value
+	 * 
+	 * @return  type
+	 */
 	function ToDate($Value)
 	{
 		return(date($this->DateFormat, $Value));
 	}
-	/* Check if a number is a full integer (for scaling) */
 
+	/**
+	 * Check if a number is a full integer (for scaling)
+	 * 
+	 * @param   mixed  $Value
+	 * 
+	 * @return  bool
+	 */
 	function isRealInt($Value)
 	{
 		if ($Value == floor($Value))

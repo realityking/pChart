@@ -45,8 +45,9 @@
   GetDataDescription()
  */
 
-/* pData class definition */
-
+/**
+ * pData class definition
+ */
 class pData
 {
 

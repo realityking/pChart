@@ -32,22 +32,30 @@
   GetHash($ID,$Data)
  */
 
-/* pCache class definition */
-
+/**
+ * pCache class definition
+ */
 class pCache
 {
 
 	var $HashKey = "";
 	var $CacheFolder = "Cache/";
 
-	/* Create the pCache object */
-
+	/**
+	 * Create the pCache object
+	 * 
+	 * @param  string  $CacheFolder
+	 */
 	function __construct($CacheFolder = "Cache/")
 	{
 		$this->CacheFolder = $CacheFolder;
 	}
-	/* This function is clearing the cache folder */
 
+	/**
+	 * This function is clearing the cache folder
+	 * 
+	 * @return  void
+	 */
 	function ClearCache()
 	{
 		if ($handle = opendir($this->CacheFolder)) {
@@ -58,8 +66,16 @@ class pCache
 			closedir($handle);
 		}
 	}
-	/* This function is checking if we have an offline version of this chart */
 
+	/**
+	 * This function is checking if we have an offline version of this chart
+	 * 
+	 * @param   type    $ID
+	 * @param   type    $Data
+	 * @param   string  $Hash
+	 * 
+	 * @return  bool
+	 */
 	function IsInCache($ID, $Data, $Hash = "")
 	{
 		if ($Hash == "")
@@ -70,8 +86,16 @@ class pCache
 		else
 			return(FALSE);
 	}
-	/* This function is making a copy of drawn chart in the cache folder */
 
+	/**
+	 * This function is making a copy of drawn chart in the cache folder
+	 * 
+	 * @param   type  $ID
+	 * @param   type  $Data
+	 * @param   resource  $Picture
+	 * 
+	 * @return  void
+	 */
 	function WriteToCache($ID, $Data, $Picture)
 	{
 		$Hash = $this->GetHash($ID, $Data);
@@ -79,8 +103,15 @@ class pCache
 
 		imagepng($Picture->Picture, $FileName);
 	}
-	/* This function is removing any cached copy of this chart */
 
+	/**
+	 * This function is removing any cached copy of this chart
+	 * 
+	 * @param   type  $ID
+	 * @param   type  $Data
+	 * 
+	 * @return  void
+	 */
 	function DeleteFromCache($ID, $Data)
 	{
 		$Hash = $this->GetHash($ID, $Data);
@@ -89,8 +120,15 @@ class pCache
 		if (file_exists($FileName))
 			unlink($FileName);
 	}
-	/* This function is retrieving the cached picture if applicable */
 
+	/**
+	 * This function is retrieving the cached picture if applicable
+	 * 
+	 * @param   type  $ID
+	 * @param   type  $Data
+	 * 
+	 * @return  void
+	 */
 	function GetFromCache($ID, $Data)
 	{
 		$Hash = $this->GetHash($ID, $Data);
@@ -102,8 +140,15 @@ class pCache
 			exit();
 		}
 	}
-	/* This function is building the graph unique hash key */
 
+	/**
+	 * This function is building the graph unique hash key
+	 * 
+	 * @param   type  $ID
+	 * @param   type  $Data
+	 * 
+	 * @return  string
+	 */
 	function GetHash($ID, $Data)
 	{
 		$mKey = "$ID";
