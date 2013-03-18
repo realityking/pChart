@@ -177,7 +177,7 @@ class pData
 	function RemoveSerie($SerieName = "Serie1")
 	{
 		if (!isset($this->DataDescription["Values"]))
-			return(0);
+			return 0;
 
 		foreach ($this->DataDescription["Values"] as $key => $Value) {
 			if ($Value == $SerieName)
@@ -244,11 +244,11 @@ class pData
 
 	function GetData()
 	{
-		return($this->Data);
+		return $this->Data;
 	}
 
 	function GetDataDescription()
 	{
-		return($this->DataDescription);
+		return $this->DataDescription;
 	}
 }

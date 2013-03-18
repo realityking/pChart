@@ -713,7 +713,7 @@ class pChart
 		$this->DataCount = count($Data);
 
 		if ($DrawTicks == FALSE)
-			return(0);
+			return 0;
 
 		$YPos = $this->GArea_Y2;
 		$XMin = NULL;
@@ -1210,7 +1210,7 @@ class pChart
 	function getLegendBoxSize($DataDescription)
 	{
 		if (!isset($DataDescription["Description"]))
-			return(-1);
+			return -1;
 
 		/* <-10->[8]<-4->Text<-10-> */
 		$MaxWidth = 0;
@@ -1227,7 +1227,7 @@ class pChart
 		$MaxHeight = $MaxHeight - 3;
 		$MaxWidth = $MaxWidth + 32;
 
-		return(array($MaxWidth, $MaxHeight));
+		return array($MaxWidth, $MaxHeight);
 	}
 
 	/**
@@ -1255,7 +1255,7 @@ class pChart
 		$this->validateDataDescription("drawLegend", $DataDescription);
 
 		if (!isset($DataDescription["Description"]))
-			return(-1);
+			return -1;
 
 		$C_TextColor = $this->AllocateColor($this->Picture, $Rt, $Gt, $Bt);
 
@@ -1319,7 +1319,7 @@ class pChart
 		$this->validateData("drawPieLegend", $Data);
 
 		if (!isset($DataDescription["Position"]))
-			return(-1);
+			return -1;
 
 		$C_TextColor = $this->AllocateColor($this->Picture, 0, 0, 0);
 
@@ -1509,7 +1509,7 @@ class pChart
 		$Y = $this->GArea_Y2 - ($Value - $this->VMin) * $this->DivisionRatio;
 
 		if ($Y <= $this->GArea_Y1 || $Y >= $this->GArea_Y2)
-			return(-1);
+			return -1;
 
 		if ($TickWidth == 0)
 			$this->drawLine($this->GArea_X1, $Y, $this->GArea_X2, $Y, $R, $G, $B);
@@ -3150,7 +3150,7 @@ class pChart
 		/* Validate serie */
 		if ($Series != 1) {
 			RaiseFatal("Pie chart can only accept one serie of data.");
-			return(0);
+			return 0;
 		}
 
 		$SpliceRatio = 360 / $PieSum;
@@ -3982,7 +3982,7 @@ class pChart
 	{
 		if ($this->LineDotSize > 1) {
 			$this->drawDottedLine($X1, $Y1, $X2, $Y2, $this->LineDotSize, $R, $G, $B, $GraphFunction);
-			return(0);
+			return 0;
 		}
 		if ($R < 0) {
 			$R = 0;
@@ -4002,7 +4002,7 @@ class pChart
 
 		$Distance = sqrt(($X2 - $X1) * ($X2 - $X1) + ($Y2 - $Y1) * ($Y2 - $Y1));
 		if ($Distance == 0)
-			return(-1);
+			return -1;
 		$XStep = ($X2 - $X1) / $Distance;
 		$YStep = ($Y2 - $Y1) / $Distance;
 
@@ -4193,7 +4193,7 @@ class pChart
 		}
 
 		if ($X < 0 || $Y < 0 || $X >= $this->XSize || $Y >= $this->YSize)
-			return(-1);
+			return -1;
 
 		$RGB2 = imagecolorat($this->Picture, $X, $Y);
 		$R2 = ($RGB2 >> 16) & 0xFF;
@@ -4243,7 +4243,7 @@ class pChart
 			$B = 255;
 		}
 
-		return(imagecolorallocate($Picture, $R, $G, $B));
+		return imagecolorallocate($Picture, $R, $G, $B);
 	}
 
 	/**
@@ -4469,7 +4469,7 @@ class pChart
 	function printErrors($Mode = "CLI")
 	{
 		if (count($this->Errors) == 0)
-			return(0);
+			return 0;
 
 		if ($Mode == "CLI") {
 			foreach ($this->Errors as $key => $Value)
@@ -4570,18 +4570,18 @@ class pChart
 	function SaveImageMap()
 	{
 		if (!$this->BuildMap) {
-			return(-1);
+			return -1;
 		}
 
 		if ($this->ImageMap == NULL) {
 			$this->Errors[] = "[Warning] SaveImageMap - Image map is empty.";
-			return(-1);
+			return -1;
 		}
 
 		$Handle = fopen($this->tmpFolder . $this->MapID, 'w');
 		if (!$Handle) {
 			$this->Errors[] = "[Warning] SaveImageMap - Cannot save the image map.";
-			return(-1);
+			return -1;
 		}
 		else {
 			foreach ($this->ImageMap as $Value)
@@ -4613,7 +4613,7 @@ class pChart
 			$Second = "0" . $Second;
 		}
 
-		return($Hour . ":" . $Minute . ":" . $Second);
+		return $Hour . ":" . $Minute . ":" . $Second;
 	}
 
 	/**
@@ -4631,15 +4631,15 @@ class pChart
 		$o = floor($Value - $Go * 1000000000 - $Mo * 1000000 - $Ko * 1000);
 
 		if ($Go != 0) {
-			return($Go . "." . $Mo . "g");
+			return $Go . "." . $Mo . "g";
 		}
 		if ($Mo != 0) {
-			return($Mo . "." . $ko . "m");
+			return $Mo . "." . $ko . "m";
 		}
 		if ($Ko != 0) {
 			return($Ko . "." . $o) . "k";
 		}
-		return($o);
+		return $o;
 	}
 
 	/**
@@ -4647,7 +4647,7 @@ class pChart
 	 * 
 	 * @param   int  $Value
 	 * 
-	 * @return  type
+	 * @return  string
 	 */
 	function ToCurrency($Value)
 	{
@@ -4675,7 +4675,7 @@ class pChart
 		}
 
 		$ResultString = $this->Currency . $ResultString;
-		return($ResultString);
+		return $ResultString;
 	}
 
 	/**
@@ -4693,13 +4693,13 @@ class pChart
 	/**
 	 * Convert TS to a date format string
 	 * 
-	 * @param   type  $Value
+	 * @param   int  $Value
 	 * 
-	 * @return  type
+	 * @return  string
 	 */
 	function ToDate($Value)
 	{
-		return(date($this->DateFormat, $Value));
+		return date($this->DateFormat, $Value);
 	}
 
 	/**
@@ -4712,8 +4712,8 @@ class pChart
 	function isRealInt($Value)
 	{
 		if ($Value == floor($Value))
-			return(TRUE);
-		return(FALSE);
+			return TRUE;
+		return FALSE;
 	}
 }
 

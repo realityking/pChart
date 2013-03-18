@@ -82,9 +82,9 @@ class pCache
 			$Hash = $this->GetHash($ID, $Data);
 
 		if (file_exists($this->CacheFolder . $Hash))
-			return(TRUE);
+			return TRUE;
 		else
-			return(FALSE);
+			return FALSE;
 	}
 
 	/**
@@ -158,6 +158,6 @@ class pCache
 				$tKey = $tKey . $Serie . $Value;
 			$mKey = $mKey . md5($tKey);
 		}
-		return(md5($mKey));
+		return md5($mKey);
 	}
 }
